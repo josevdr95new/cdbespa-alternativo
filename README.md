@@ -4,7 +4,8 @@ Generado con https://github.com/josevdr95new/CDBtext_migrator
 ```bash
 {
 	"repos": [
-	    {
+	
+	   {
 			"url": "https://github.com/josevdr95new/cdbespa-alternativo",
 			"repo_name": "josevdr95 cdbespa-alternativo",
 			"repo_path": "./config/languages/Español-Alternativo",
@@ -12,9 +13,9 @@ Generado con https://github.com/josevdr95new/CDBtext_migrator
 			"should_read": true
 		},
 		{
-			"url": "https://github.com/ProjectIgnis/DeltaPuppetOfStrings",
+			"url": "https://github.com/ProjectIgnis/DeltaBagooska",
 			"repo_name": "Project Ignis updates",
-			"repo_path": "./repositories/delta-puppet",
+			"repo_path": "./repositories/delta-bagooska",
 			"has_core": true,
 			"core_path": "bin",
 			"data_path": "",
