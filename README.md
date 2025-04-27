@@ -1,5 +1,9 @@
 Generado con https://github.com/josevdr95new/CDBtext_migrator
 
+Cartas en Español para Edopro.
+
+Traducidas solo las cartas del TCG y algunos modos alternativos.
+
 ## ⚙️ Configs
 ```bash
 {
