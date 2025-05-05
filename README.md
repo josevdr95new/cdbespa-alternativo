@@ -2,7 +2,7 @@ Generado con https://github.com/josevdr95new/CDBtext_migrator
 
 Cartas en Español para Edopro con nombres en ingles (Español-Alternativo).
 
-## ⚙️ Configs (Completo)
+## ⚙️ Configs
 ```bash
         {
             "url": "https://github.com/josevdr95new/cdbespa-alternativo",
@@ -12,7 +12,7 @@ Cartas en Español para Edopro con nombres en ingles (Español-Alternativo).
             "should_read": true
         }
 ```
-## ⚙️ Configs.json
+## ⚙️ Configs.json (Completo)
 ```bash
 {
 	"repos": [
