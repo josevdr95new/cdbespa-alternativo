@@ -1,0 +1,42 @@
+name: Auto-Migrate CDB Texts
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  auto-migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout cdbespa-alternativo
+        uses: actions/checkout@v4
+        with:
+          ref: auto-migrate
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install git
+        run: sudo apt-get update && sudo apt-get install -y git
+
+      - name: Run auto-migrator
+        env:
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN }}
+          REPO_DIR: "."
+        run: python cdbtext_auto_migrator.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "🔄 Auto-migrate CDB texts from source repos [skip ci]"
+          git push origin auto-migrate
