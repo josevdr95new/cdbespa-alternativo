@@ -87,6 +87,12 @@ def accumulate_history(views_data, clones_data, history):
 
     today_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     history["last_updated"] = today_str
+
+    # Track the earliest date we started recording
+    all_dates = list(history["daily_views"].keys()) + list(history["daily_clones"].keys())
+    if all_dates and "tracking_since" not in history:
+        history["tracking_since"] = min(all_dates)
+
     return history
 
 # ── 4. Generate compact README snippet ─────────────────────────────────────
@@ -102,6 +108,9 @@ def generate_stats_snippet(history, meta):
 
     b = "https://img.shields.io/badge"
 
+    tracking_since = history.get("tracking_since", "")
+    since_text = f" · Registro desde: {tracking_since}" if tracking_since else ""
+
     lines = [
         f"{STATS_MARKER_START}",
         f"## 📊 Estadísticas",
@@ -116,7 +125,7 @@ def generate_stats_snippet(history, meta):
         f"| 🍴 Forks | **{forks}** | — |",
         f"| 👀 Watchers | **{watchers}** | — |",
         f"",
-        f"<sub>Actualizado: {last_updated} · Datos acumulados de por vida</sub>",
+        f"<sub>Actualizado: {last_updated}{since_text}</sub>",
         f"",
         f"{STATS_MARKER_END}",
     ]
