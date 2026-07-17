@@ -1,4 +1,4 @@
-Generado con https://github.com/josevdr95new/CDBtext_migrator
+Creado con: https://github.com/josevdr95new/CDBtext_migrator
 
 Cartas en Español para Edopro con nombres en ingles (Español-Alternativo).
 
