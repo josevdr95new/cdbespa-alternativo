@@ -41,6 +41,6 @@ Creado con [CDBtext_migrator](https://github.com/josevdr95new/CDBtext_migrator)
 | 🍴 Forks | **0** | — |
 | 👀 Watchers | **1** | — |
 
-<sub>Actualizado: 2026-07-17 · Datos acumulados de por vida</sub>
+<sub>Actualizado: 2026-07-17 · Registro desde: 2026-07-02</sub>
 
 <!-- STATS:END -->
