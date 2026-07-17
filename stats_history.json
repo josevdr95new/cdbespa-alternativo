@@ -1,0 +1,123 @@
+{
+  "daily_views": {
+    "2026-07-02": {
+      "count": 14,
+      "uniques": 1
+    },
+    "2026-07-03": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-07-04": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-05": {
+      "count": 2,
+      "uniques": 2
+    },
+    "2026-07-06": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-07": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-08": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-09": {
+      "count": 4,
+      "uniques": 2
+    },
+    "2026-07-10": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-11": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-12": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-13": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-14": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-07-15": {
+      "count": 0,
+      "uniques": 0
+    }
+  },
+  "daily_clones": {
+    "2026-07-02": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-03": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-07-04": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-05": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-07-06": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-07": {
+      "count": 2,
+      "uniques": 2
+    },
+    "2026-07-08": {
+      "count": 1,
+      "uniques": 1
+    },
+    "2026-07-09": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-10": {
+      "count": 2,
+      "uniques": 2
+    },
+    "2026-07-11": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-12": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-13": {
+      "count": 2,
+      "uniques": 1
+    },
+    "2026-07-14": {
+      "count": 0,
+      "uniques": 0
+    },
+    "2026-07-15": {
+      "count": 1,
+      "uniques": 1
+    }
+  },
+  "lifetime_total_views": 22,
+  "lifetime_total_unique_views": 7,
+  "lifetime_total_clones": 10,
+  "lifetime_total_unique_clones": 9,
+  "last_updated": "2026-07-17"
+}
