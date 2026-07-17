@@ -294,7 +294,7 @@ def main():
     last_ignis = cache.get(IGNIS_SHA_CACHE, "")
 
     print(f"\nBabelCDB SHA: {current_babel_sha[:7]} (último: {last_babel[:7] if last_babel else 'nunca'})")
-    print(f"IgnisMulti SHA: {current_ignis_sha[:7]} (último: {last_ignis_sha[:7] if last_ignis else 'nunca'})")
+    print(f"IgnisMulti SHA: {current_ignis_sha[:7]} (último: {last_ignis[:7] if last_ignis else 'nunca'})")
 
     if not current_babel_sha and not current_ignis_sha:
         print("No se pudieron obtener los SHAs. Abortando.")
