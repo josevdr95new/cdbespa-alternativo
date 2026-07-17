@@ -1,0 +1,54 @@
+name: Update Repository Lifetime Stats
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: "0 0 * * *"
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Fetch and accumulate stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN }}
+          REPO_OWNER: josevdr95new
+          REPO_NAME: cdbespa-alternativo
+        run: python stats_collector.py
+
+      - name: Update README with stats
+        run: |
+          # Read the original README
+          if [ -f README.md ]; then
+            # Remove old stats section and everything after the marker
+            sed -i '/<!-- AUTO-GENERATED STATS/,/^$/c\' README.md 2>/dev/null || true
+            # Also remove trailing stats content that may remain
+            sed -i '/<!-- AUTO-GENERATED STATS/,$d' README.md 2>/dev/null || true
+            # Ensure README ends with newline
+            sed -i -e '$a\' README.md 2>/dev/null || true
+          fi
+          # Append the new stats section
+          cat README_stats.md >> README.md
+          echo "README updated with stats"
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "📊 Update lifetime stats [skip ci]"
+          git push
