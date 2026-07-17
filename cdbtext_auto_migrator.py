@@ -89,6 +89,9 @@ def transfer_texts(en_folder, es_folder, repo_dir):
     es_files = {f for f in os.listdir(es_folder) if f.endswith('.cdb')}
     common_files = sorted(en_files & es_files)
 
+    # Ensure repo_dir exists
+    os.makedirs(repo_dir, exist_ok=True)
+
     print(f"\nCommon CDB files: {len(common_files)}")
     total_updates = 0
 
