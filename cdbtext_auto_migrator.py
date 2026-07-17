@@ -8,7 +8,7 @@ Condición final:
   - Efectos (desc, str1-str7) en español, pero texto dentro de "" en inglés
 
 El script solo migra las cartas que NO cumplen esta condición.
-El log muestra: total cartas, OK, corregidas, sin traducción española (no en DB española).
+El log muestra: total cartas, OK, corregidas, sin traducción española (con ID y nombre).
 """
 
 import sqlite3
@@ -140,13 +140,8 @@ def transfer_texts(en_folder, es_folder, repo_dir):
     Transfer texts from English CDBs to Spanish CDBs, but ONLY for cards
     that don't already meet the final condition in the repo.
 
-    Returns (total_updates, log_data) where log_data contains full stats:
-    - total_en: total cards in English CDB
-    - total_es: total cards in Spanish CDB
-    - total_ok: cards already meeting condition (no change needed)
-    - total_fixed: cards corrected this run
-    - total_no_es: cards in EN but NOT in ES (no Spanish translation yet)
-    - total_no_en: cards in ES but NOT in EN
+    Returns (total_updates, log_data) where log_data contains full stats including
+    list of cards missing Spanish translation (with ID and name).
     """
     en_files = {f for f in os.listdir(en_folder) if f.endswith('.cdb')}
     es_files = {f for f in os.listdir(es_folder) if f.endswith('.cdb')}
@@ -163,7 +158,7 @@ def transfer_texts(en_folder, es_folder, repo_dir):
         es_path = os.path.join(es_folder, file_name)
         repo_path = os.path.join(repo_dir, file_name)
 
-        file_log = {"file": file_name, "cards": []}
+        file_log = {"file": file_name, "cards": [], "missing_es": []}
         file_updates = 0
 
         try:
@@ -206,6 +201,10 @@ def transfer_texts(en_folder, es_folder, repo_dir):
                 if text_id not in es_texts:
                     # Card exists in EN but NOT in ES — no Spanish translation yet
                     total_no_es += 1
+                    file_log["missing_es"].append({
+                        "id": text_id,
+                        "name": en_data.get('name', '') or '(sin nombre)'
+                    })
                     continue
 
                 es_data = es_texts[text_id]
@@ -292,10 +291,6 @@ def transfer_texts(en_folder, es_folder, repo_dir):
                             "new_card": True
                         })
 
-            # Count OK cards that were already in repo from previous runs
-            # (those that are in both EN and ES sources, exist in repo, and meet condition)
-            # We already counted them above in the loop
-
             conn_repo.commit()
             conn_repo.close()
 
@@ -373,8 +368,8 @@ def transfer_texts(en_folder, es_folder, repo_dir):
     return total_updates, all_log_data
 
 
-def generate_log_markdown(log_data, cache, babel_sha, ignis_sha, limit=None):
-    """Generate a markdown migration log with full stats per file."""
+def generate_log_markdown(log_data, cache, babel_sha, ignis_sha, limit=None, missing_limit=None):
+    """Generate a markdown migration log with full stats and missing translation list."""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     lines = [
@@ -417,7 +412,7 @@ def generate_log_markdown(log_data, cache, babel_sha, ignis_sha, limit=None):
         t_ok = stats.get("total_ok", 0)
         t_fixed = entry.get("updated_count", 0)
         t_no_es = stats.get("total_no_es", 0)
-        t_es_common = t_en - t_no_es  # cards that exist in both EN and ES
+        t_es_common = t_en - t_no_es
 
         grand_total_en += t_en
         grand_total_es_common += t_es_common
@@ -426,7 +421,7 @@ def generate_log_markdown(log_data, cache, babel_sha, ignis_sha, limit=None):
         grand_total_no_es += t_no_es
 
         fixed_str = f"**{t_fixed}**" if t_fixed > 0 else "0"
-        no_es_str = f"{t_no_es}" if t_no_es > 0 else "0"
+        no_es_str = f"**{t_no_es}**" if t_no_es > 0 else "0"
 
         lines.append(f"| `{fname}` | {t_en} | {t_es_common} | {t_ok} | {fixed_str} | {no_es_str} |")
 
@@ -437,42 +432,85 @@ def generate_log_markdown(log_data, cache, babel_sha, ignis_sha, limit=None):
     lines.append("<sub>**Cartas EN** = total en BabelCDB · **Traducidas ES** = también en IgnisMulti/Español · **✅ OK** = ya cumplen condición · **🔧 Corregidas** = aplicadas esta ejecución · **❌ Sin trad. ES** = no existen en la DB española aún</sub>")
     lines.append("")
 
-    if grand_total_fixed == 0:
+    if grand_total_fixed == 0 and grand_total_no_es == 0:
         lines.append("*Todas las cartas traducidas ya cumplen la condición. No se requirió migración.*")
         lines.append("")
+    elif grand_total_fixed == 0:
+        lines.append("*Todas las cartas traducidas ya cumplen la condición.*")
+        lines.append("")
 
-    # Detailed per-file logs (only for files with changes)
+    # Section: Cartas corregidas (only for files with fixes)
     max_show = limit
-    for entry in log_data:
-        if "status" in entry or "error" in entry:
-            continue
-        cards = entry.get("cards", [])
-        if not cards:
-            continue
-
-        fname = entry["file"]
-        total_cards = len(cards)
-        show_cards = cards[:max_show] if max_show else cards
-        omitted = total_cards - len(show_cards)
-
-        lines.append(f"### `{fname}` ({total_cards} cartas corregidas)")
+    has_fixes = any(e.get("cards") for e in log_data if "status" not in e and "error" not in e)
+    if has_fixes:
+        lines.append("### 🔧 Cartas corregidas")
         lines.append("")
-        lines.append("| ID | Nombre | Campo | Antes → Después |")
-        lines.append("|--:|--------|-------|-----------------|")
+        for entry in log_data:
+            if "status" in entry or "error" in entry:
+                continue
+            cards = entry.get("cards", [])
+            if not cards:
+                continue
 
-        for card in show_cards:
-            cid = card["id"]
-            cname = card.get("name", "?")[:40]
-            for change in card["changes"]:
-                field = change["field"]
-                before = change["before"].replace("|", "\\|").replace("\n", " ")[:35]
-                after = change["after"].replace("|", "\\|").replace("\n", " ")[:35]
-                lines.append(f"| {cid} | {cname} | {field} | `{before}` → `{after}` |")
+            fname = entry["file"]
+            total_cards = len(cards)
+            show_cards = cards[:max_show] if max_show else cards
+            omitted = total_cards - len(show_cards)
 
-        if omitted > 0:
-            lines.append(f"| | *...y {omitted} cartas más* | | Ver detalle en [`MIGRATE_LOG.md`](MIGRATE_LOG.md) |")
+            lines.append(f"**`{fname}`** ({total_cards} cartas)")
+            lines.append("")
+            lines.append("| ID | Nombre | Campo | Antes → Después |")
+            lines.append("|--:|--------|-------|-----------------|")
 
+            for card in show_cards:
+                cid = card["id"]
+                cname = card.get("name", "?")[:40]
+                for change in card["changes"]:
+                    field = change["field"]
+                    before = change["before"].replace("|", "\\|").replace("\n", " ")[:35]
+                    after = change["after"].replace("|", "\\|").replace("\n", " ")[:35]
+                    lines.append(f"| {cid} | {cname} | {field} | `{before}` → `{after}` |")
+
+            if omitted > 0:
+                lines.append(f"| | *...y {omitted} cartas más* | | Ver detalle en [`MIGRATE_LOG.md`](MIGRATE_LOG.md) |")
+
+            lines.append("")
+
+    # Section: Cartas sin traducción española
+    max_missing = missing_limit
+    has_missing = any(e.get("missing_es") for e in log_data if "status" not in e and "error" not in e)
+    if has_missing:
+        lines.append("### ❌ Cartas sin traducción española")
         lines.append("")
+        lines.append("Estas cartas existen en BabelCDB (inglés) pero no en IgnisMulti/Español. Se incluirán automáticamente cuando se traduzcan.")
+        lines.append("")
+
+        for entry in log_data:
+            if "status" in entry or "error" in entry:
+                continue
+            missing = entry.get("missing_es", [])
+            if not missing:
+                continue
+
+            fname = entry["file"]
+            total_missing = len(missing)
+            show_missing = missing[:max_missing] if max_missing else missing
+            omitted = total_missing - len(show_missing)
+
+            lines.append(f"**`{fname}`** ({total_missing} cartas)")
+            lines.append("")
+            lines.append("| ID | Nombre (EN) |")
+            lines.append("|--:|-------------|")
+
+            for card in show_missing:
+                cid = card["id"]
+                cname = card.get("name", "?").replace("|", "\\|")[:50]
+                lines.append(f"| {cid} | {cname} |")
+
+            if omitted > 0:
+                lines.append(f"| | *...y {omitted} cartas más* |")
+
+            lines.append("")
 
     lines.append(f"{LOG_MARKER_END}")
     return "\n".join(lines)
@@ -541,11 +579,11 @@ def main():
         if needs_copy:
             shutil.copy2(es_strings, repo_strings)
 
-    # Generate migration log markdown (limited for README)
-    log_md_readme = generate_log_markdown(log_data, cache, current_babel_sha, current_ignis_sha, limit=20)
+    # Generate migration log markdown (limited for README: 20 fixes, 50 missing)
+    log_md_readme = generate_log_markdown(log_data, cache, current_babel_sha, current_ignis_sha, limit=20, missing_limit=50)
 
-    # Generate full log for MIGRATE_LOG.md (no limit)
-    log_md_full = generate_log_markdown(log_data, cache, current_babel_sha, current_ignis_sha, limit=None)
+    # Generate full log for MIGRATE_LOG.md (no limits)
+    log_md_full = generate_log_markdown(log_data, cache, current_babel_sha, current_ignis_sha, limit=None, missing_limit=None)
 
     with open(MIGRATE_LOG_FILE, "w") as f:
         f.write(log_md_full)
@@ -564,7 +602,7 @@ def main():
     if updates > 0:
         print(f"\nMigración completada: {updates} cartas corregidas")
     else:
-        print("\nMigración completada: todas las cartas ya cumplen la condición")
+        print("\nMigración completada: todas las cartas traducidas ya cumplen la condición")
 
 
 if __name__ == "__main__":
