@@ -8,7 +8,7 @@ Condición final:
   - Efectos (desc, str1-str7) en español, pero texto dentro de "" en inglés
 
 El script solo migra las cartas que NO cumplen esta condición.
-El log solo muestra las cartas recién corregidas/traducidas.
+El log muestra: total cartas, OK, corregidas, sin traducción española (no en DB española).
 """
 
 import sqlite3
@@ -140,10 +140,13 @@ def transfer_texts(en_folder, es_folder, repo_dir):
     Transfer texts from English CDBs to Spanish CDBs, but ONLY for cards
     that don't already meet the final condition in the repo.
 
-    Final condition: name in English, effects in Spanish with English quoted content.
-
-    Returns (total_updates, log_data) where log_data only contains cards that
-    were actually changed (newly migrated/fixed).
+    Returns (total_updates, log_data) where log_data contains full stats:
+    - total_en: total cards in English CDB
+    - total_es: total cards in Spanish CDB
+    - total_ok: cards already meeting condition (no change needed)
+    - total_fixed: cards corrected this run
+    - total_no_es: cards in EN but NOT in ES (no Spanish translation yet)
+    - total_no_en: cards in ES but NOT in EN
     """
     en_files = {f for f in os.listdir(en_folder) if f.endswith('.cdb')}
     es_files = {f for f in os.listdir(es_folder) if f.endswith('.cdb')}
@@ -179,6 +182,13 @@ def transfer_texts(en_folder, es_folder, repo_dir):
             cursor_es.execute(f'SELECT id, {", ".join(columns)} FROM texts')
             es_texts = {row[0]: {col: row[i+1] for i, col in enumerate(columns)} for row in cursor_es.fetchall()}
 
+            # Counters
+            total_en = len(en_texts)
+            total_es = len(es_texts)
+            total_ok = 0
+            total_fixed = 0
+            total_no_es = 0
+
             # If repo CDB doesn't exist yet, create it from Spanish base
             if not os.path.exists(repo_path):
                 shutil.copy2(es_path, repo_path)
@@ -194,7 +204,9 @@ def transfer_texts(en_folder, es_folder, repo_dir):
             # Process cards that exist in both English and Spanish sources
             for text_id, en_data in en_texts.items():
                 if text_id not in es_texts:
-                    continue  # No Spanish translation available
+                    # Card exists in EN but NOT in ES — no Spanish translation yet
+                    total_no_es += 1
+                    continue
 
                 es_data = es_texts[text_id]
 
@@ -207,6 +219,7 @@ def transfer_texts(en_folder, es_folder, repo_dir):
 
                     if card_meets_condition(repo_data, en_data, columns):
                         # Card already correct — skip entirely
+                        total_ok += 1
                         continue
 
                     # Card doesn't meet condition — find what needs to change
@@ -230,6 +243,7 @@ def transfer_texts(en_folder, es_folder, repo_dir):
                         params = list(updates.values()) + [text_id]
                         cursor_repo.execute(f"UPDATE texts SET {set_clause} WHERE id = ?", params)
                         file_updates += 1
+                        total_fixed += 1
                         file_log["cards"].append({
                             "id": text_id,
                             "name": target_data.get('name', '?'),
@@ -242,6 +256,7 @@ def transfer_texts(en_folder, es_folder, repo_dir):
                         [text_id] + [target_data.get(col, '') for col in columns]
                     )
                     file_updates += 1
+                    total_fixed += 1
                     card_changes = []
                     for col in columns:
                         target_val = target_data.get(col, '') or ''
@@ -259,23 +274,40 @@ def transfer_texts(en_folder, es_folder, repo_dir):
                     })
 
             # Also add Spanish-only cards that aren't in the repo yet
+            total_no_en = 0
             for text_id, es_data in es_texts.items():
-                if text_id not in en_texts and text_id not in repo_texts:
-                    # Spanish-only card — add as-is
-                    cursor_repo.execute(
-                        f'INSERT INTO texts (id, {", ".join(columns)}) VALUES (?, {", ".join(["?"] * len(columns))})',
-                        [text_id] + [es_data.get(col, '') or '' for col in columns]
-                    )
-                    file_updates += 1
-                    file_log["cards"].append({
-                        "id": text_id,
-                        "name": es_data.get('name', '(solo español)'),
-                        "changes": [{"field": "new", "before": "(nueva)", "after": "carta solo español"}],
-                        "new_card": True
-                    })
+                if text_id not in en_texts:
+                    total_no_en += 1
+                    if text_id not in repo_texts:
+                        # Spanish-only card — add as-is
+                        cursor_repo.execute(
+                            f'INSERT INTO texts (id, {", ".join(columns)}) VALUES (?, {", ".join(["?"] * len(columns))})',
+                            [text_id] + [es_data.get(col, '') or '' for col in columns]
+                        )
+                        file_updates += 1
+                        file_log["cards"].append({
+                            "id": text_id,
+                            "name": es_data.get('name', '(solo español)'),
+                            "changes": [{"field": "new", "before": "(nueva)", "after": "carta solo español"}],
+                            "new_card": True
+                        })
+
+            # Count OK cards that were already in repo from previous runs
+            # (those that are in both EN and ES sources, exist in repo, and meet condition)
+            # We already counted them above in the loop
 
             conn_repo.commit()
             conn_repo.close()
+
+            # Store stats
+            file_log["stats"] = {
+                "total_en": total_en,
+                "total_es": total_es,
+                "total_ok": total_ok,
+                "total_fixed": total_fixed,
+                "total_no_es": total_no_es,
+                "total_no_en": total_no_en
+            }
 
         except Exception as e:
             print(f"  ERROR en {file_name}: {e}")
@@ -294,8 +326,8 @@ def transfer_texts(en_folder, es_folder, repo_dir):
         file_log["updated_count"] = file_updates
         all_log_data.append(file_log)
 
-        skipped = len([c for c in file_log.get("cards", [])]) if "error" not in file_log else 0
-        print(f"  {file_name}: {file_updates} cartas corregidas")
+        stats = file_log.get("stats", {})
+        print(f"  {file_name}: EN={stats.get('total_en',0)} ES={stats.get('total_es',0)} OK={stats.get('total_ok',0)} corregidas={file_updates} sin_trad_es={stats.get('total_no_es',0)}")
 
     # Handle Spanish-only files (files that exist in Spanish but not English source)
     es_only = sorted(es_files - en_files)
@@ -322,12 +354,27 @@ def transfer_texts(en_folder, es_folder, repo_dir):
             all_log_data.append({"file": file_name, "status": "solo inglés, copiado"})
             print(f"  {file_name}: copiado (solo inglés)")
 
-    print(f"\nTotal: {total_updates} cartas corregidas en {len(common_files)} archivos")
+    # Grand totals
+    grand_total_en = sum(e.get("stats", {}).get("total_en", 0) for e in all_log_data if "stats" in e)
+    grand_total_es = sum(e.get("stats", {}).get("total_es", 0) for e in all_log_data if "stats" in e)
+    grand_total_ok = sum(e.get("stats", {}).get("total_ok", 0) for e in all_log_data if "stats" in e)
+    grand_total_fixed = total_updates
+    grand_total_no_es = sum(e.get("stats", {}).get("total_no_es", 0) for e in all_log_data if "stats" in e)
+    grand_total_no_en = sum(e.get("stats", {}).get("total_no_en", 0) for e in all_log_data if "stats" in e)
+
+    print(f"\nTotal general:")
+    print(f"  Cartas EN: {grand_total_en}")
+    print(f"  Cartas ES: {grand_total_es}")
+    print(f"  OK (ya cumplen): {grand_total_ok}")
+    print(f"  Corregidas: {grand_total_fixed}")
+    print(f"  Sin traducción ES: {grand_total_no_es}")
+    print(f"  Solo en ES: {grand_total_no_en}")
+
     return total_updates, all_log_data
 
 
 def generate_log_markdown(log_data, cache, babel_sha, ignis_sha, limit=None):
-    """Generate a markdown migration log. Only shows newly migrated/fixed cards."""
+    """Generate a markdown migration log with full stats per file."""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     lines = [
@@ -344,32 +391,54 @@ def generate_log_markdown(log_data, cache, babel_sha, ignis_sha, limit=None):
         f"",
     ]
 
-    # Summary table
-    lines.append("### Resumen por archivo")
+    # Summary table with full stats
+    lines.append("### Estado por archivo")
     lines.append("")
-    lines.append("| Archivo | Cartas corregidas | Estado |")
-    lines.append("|---------|-------------------:|--------|")
+    lines.append("| Archivo | Cartas EN | Traducidas ES | ✅ OK | 🔧 Corregidas | ❌ Sin trad. ES |")
+    lines.append("|---------|----------:|--------------:|------:|--------------:|----------------:|")
 
-    total_fixed = 0
+    grand_total_en = 0
+    grand_total_es_common = 0
+    grand_total_ok = 0
+    grand_total_fixed = 0
+    grand_total_no_es = 0
+
     for entry in log_data:
         fname = entry["file"]
         if "error" in entry:
-            lines.append(f"| `{fname}` | — | ❌ Error |")
-        elif "status" in entry:
-            lines.append(f"| `{fname}` | 0 | 📋 {entry['status']} |")
-        else:
-            count = entry.get("updated_count", 0)
-            total_fixed += count
-            if count > 0:
-                lines.append(f"| `{fname}` | **{count}** | ✅ Corregido |")
-            else:
-                lines.append(f"| `{fname}` | 0 | ✅ Todo correcto |")
+            lines.append(f"| `{fname}` | — | — | — | — | ❌ Error |")
+            continue
+        if "status" in entry:
+            lines.append(f"| `{fname}` | — | — | — | — | 📋 {entry['status']} |")
+            continue
 
-    lines.append(f"| **Total** | **{total_fixed}** | |")
+        stats = entry.get("stats", {})
+        t_en = stats.get("total_en", 0)
+        t_ok = stats.get("total_ok", 0)
+        t_fixed = entry.get("updated_count", 0)
+        t_no_es = stats.get("total_no_es", 0)
+        t_es_common = t_en - t_no_es  # cards that exist in both EN and ES
+
+        grand_total_en += t_en
+        grand_total_es_common += t_es_common
+        grand_total_ok += t_ok
+        grand_total_fixed += t_fixed
+        grand_total_no_es += t_no_es
+
+        fixed_str = f"**{t_fixed}**" if t_fixed > 0 else "0"
+        no_es_str = f"{t_no_es}" if t_no_es > 0 else "0"
+
+        lines.append(f"| `{fname}` | {t_en} | {t_es_common} | {t_ok} | {fixed_str} | {no_es_str} |")
+
+    lines.append(f"| **Total** | **{grand_total_en}** | **{grand_total_es_common}** | **{grand_total_ok}** | **{grand_total_fixed}** | **{grand_total_no_es}** |")
     lines.append("")
 
-    if total_fixed == 0:
-        lines.append("*Todas las cartas ya cumplen la condición. No se requirió migración.*")
+    # Explanation
+    lines.append("<sub>**Cartas EN** = total en BabelCDB · **Traducidas ES** = también en IgnisMulti/Español · **✅ OK** = ya cumplen condición · **🔧 Corregidas** = aplicadas esta ejecución · **❌ Sin trad. ES** = no existen en la DB española aún</sub>")
+    lines.append("")
+
+    if grand_total_fixed == 0:
+        lines.append("*Todas las cartas traducidas ya cumplen la condición. No se requirió migración.*")
         lines.append("")
 
     # Detailed per-file logs (only for files with changes)
