@@ -1,12 +1,12 @@
 <!-- MIGRATE_LOG:START -->
 ## 🔄 Log de migración
 
-<sub>Última verificación: **2026-07-19 01:53 UTC**</sub>
+<sub>Última verificación: **2026-07-19 18:54 UTC**</sub>
 
 **Condición:** nombres en inglés · efectos en español · texto en `""` en inglés
 
 **Fuentes:**
-- `ProjectIgnis/BabelCDB` @ `f9e0404`
+- `ProjectIgnis/BabelCDB` @ `ba612a7`
 - `Team13fr/IgnisMulti` @ `d438822`
 
 ### Estado por archivo
@@ -17,7 +17,7 @@
 | `cards-skills-unofficial.cdb` | 19 | 19 | 19 | 0 | 0 |
 | `cards-skills.cdb` | 208 | 208 | 208 | 0 | 0 |
 | `cards-unofficial.cdb` | 5878 | 5876 | 5749 | **127** | **2** |
-| `cards.cdb` | 14578 | 14336 | 1323 | **13013** | **242** |
+| `cards.cdb` | 14605 | 14336 | 1323 | **13013** | **269** |
 | `goat-entries.cdb` | 191 | 191 | 191 | 0 | 0 |
 | `prerelease-cards-rush.cdb` | 39 | 0 | 0 | 0 | **39** |
 | `prerelease-others.cdb` | 12 | 0 | 0 | 0 | **12** |
@@ -26,7 +26,7 @@
 | `prerelease-locr.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `prerelease-mzmu.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `release-blzd.cdb` | — | — | — | — | 📋 solo español, copiado |
-| **Total** | **24323** | **23824** | **10560** | **13264** | **499** |
+| **Total** | **24350** | **23824** | **10560** | **13264** | **526** |
 
 <sub>**EN** = total BabelCDB · **Traducidas** = también en IgnisMulti/ES · **✅ OK** = ya transformadas · **🆕 Nuevas** = transformadas esta ejecución · **❌ Sin trad. ES** = no existen en DB española</sub>
 
@@ -13531,7 +13531,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 17412731 | Elder Entity Norden |
 | 96782896 | Mind Master |
 
-**`cards.cdb`** (242 cartas)
+**`cards.cdb`** (269 cartas)
 
 | ID | Nombre (EN) |
 |--:|-------------|
@@ -13553,10 +13553,15 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 5125629 | Malefic Paradigm Shift |
 | 5148778 | Starving Venom Wing Dragon |
 | 5208118 | Solving for Pendulum |
+| 6071005 | Witchcrafter Marka |
 | 6083904 | Diabrocken the Ominous Specter |
 | 6325660 | Dominus Spark |
 | 6361316 | WAKE CUP! Kuro |
 | 6547248 | Clown Crew New Face |
+| 6958567 | Witchcrafter Celebration |
+| 7293697 | Toon World the Perfect World |
+| 8915275 | Evil Box |
+| 9603253 | Witchcrafter Vice-Madame |
 | 10000120 | Prince of Fairies |
 | 10266279 | Junoldo the Shadespirit Power Patron |
 | 12908094 | Gagaga Magician - Gagaga Magic |
@@ -13593,9 +13598,12 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 19438484 | Ilios the Black Sun Dragon |
 | 19504025 | Enneacraft Reset |
 | 20448151 | Clown Crew Rehearsal |
+| 21419436 | Unchained Soul Rage Abominator |
 | 21522602 | Witchcrafter Madame Verre |
+| 21522603 | Witchcrafter Madame Verre |
 | 21887176 | Mekk-Knight Crusadia Avramax |
 | 24056179 | Capsule Monster Chess |
+| 24269962 | Unchained Soul Lord of Yama |
 | 25542643 | Phantom Knights' Fog Blade |
 | 25661743 | Prohibited Power Patron Portal - Terminus |
 | 26364381 | Demiurge Ema |
@@ -13611,6 +13619,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 28331070 | Neo Galaxy-Eyes Photon Dragon - Photon Howling |
 | 29053656 | Crimson Dragon Quetzacoatl |
 | 29053657 | Crimson Dragon Quetzacoatl |
+| 29479266 | Unchained Abomination |
 | 30275298 | Cyber End Dragon the Decisive Strike Dragon |
 | 30275299 | Cyber End Dragon the Decisive Strike Dragon |
 | 30397786 | Blue-Eyes White Dragon, the White Phantom Beast |
@@ -13618,8 +13627,13 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 30698243 | Red Hypernova Dragon |
 | 31114334 | Assault Blackwing - Kusanagi the Gathering Storm |
 | 31411835 | Hecahands Dandalos |
+| 31531914 | Unchained Ogre Shma |
 | 31533473 | Clown Crew Diabolo |
 | 32236916 | Rainbow Bridge Bifrost |
+| 32353566 | Witchcrafter Walpurgis |
+| 33475154 | Witchcrafter Madame Rilliona |
+| 34298391 | Mind Scan |
+| 34314989 | Dark-Eyes Illusionist Faceless Mage |
 | 34755995 | Artemis, the Magistus Moon Maiden |
 | 37458564 | Cyberse Contract Witch |
 | 37458565 | Cyberse Contract Witch |
@@ -13651,6 +13665,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 44994712 | Predaplant Longinephila |
 | 45116390 | Heavy Armored Knight Babeldecker |
 | 45508030 | Possessed Destiny |
+| 45536531 | Funny Dark Rabbit |
 | 45538320 | Spiritual Art Familiars |
 | 46985799 | Black Rose Dragon/Assault Mode |
 | 48171151 | Astrograph Sorcerer, the Star Magician |
@@ -13668,6 +13683,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 52768391 | Dark Creator Token |
 | 52782439 | Exceptional Schedule |
 | 52782440 | Diagram Token |
+| 53183601 | Blue-Eyes Toon Dragon |
 | 53481938 | Rokket Barrage |
 | 53481939 | Rokket Barrage |
 | 53765053 | Diabellze the Original Sinkeeper |
@@ -13694,21 +13710,28 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 66664203 | Revolution Cyber Dragon |
 | 66664204 | Revolution Cyber Dragon |
 | 66787942 | Predaplant Bal Teah |
+| 67803035 | Reincarnation of the Unchained |
 | 67809530 | The Crimson King |
 | 67886895 | Deep-Eyes White Dragon, the Blue Abyss |
 | 67886896 | Deep-Eyes White Dragon, the Blue Abyss |
 | 68337210 | Maliss in Underground |
 | 68468461 | Fallen of Albaz |
 | 68508433 | Master Spirit Tech Force - Pendulum Ruler |
+| 68625623 | Unchained Malevolent Magistrate Kamura |
 | 68721020 | Malefic Force |
+| 69748261 | Witchcrafter Distortion |
+| 69964858 | Witchcrafter Pupils |
 | 70058649 | Clown Crew Soiree Operations |
 | 70088809 | Fydraulis Harmonia |
 | 70488851 | Vidolium the Unstable Power Patron of Unity |
+| 70686400 | Witchcrafter Terracottan |
 | 70781057 | Summoned Skull |
 | 71275181 | Fifty Fifty? |
 | 71564253 | Thunder King Rai-Oh |
 | 71801447 | Enneacraft - Atil.SPIA |
+| 71808988 | Blue-Eyes Toon Ultimate Dragon |
 | 72270341 | Diabellstar the Black Witch |
+| 72921536 | Comic Cat |
 | 72989440 | Black Luster Soldier - Envoy of the Beginning |
 | 73443672 | Underworld Circle |
 | 74378580 | GMX Lab #5 |
@@ -13760,6 +13783,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 90091224 | Dark Rebellion Xyz Dragon of the Four Heavenly Dra |
 | 90091225 | Dark Rebellion Xyz Dragon of the Four Heavenly Dra |
 | 90448282 | Divine Arsenal AA-ZEUS - Sky Thunder |
+| 90960359 | Toon Dark Magician Girl |
 | 91237821 | Clown Crew Fiends |
 | 91714772 | Galaxy Defense Robot Orbital 7 |
 | 91714773 | Galaxy Defense Robot Orbital 7 |
@@ -13774,7 +13798,10 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 93854894 | Dingirsu, the Orcust of the Evening Star |
 | 93871599 | The Flute of Guiding Dragon |
 | 93871600 | The Flute of Guiding Dragon |
+| 93898740 | Unchained Syncretism |
+| 94014327 | Unchained Enma Lord Yama |
 | 94677446 | Ib the World Chalice Justiciar |
+| 95136979 | Unchained Ogre Shara |
 | 97077564 | Call of the Haunted |
 | 99398682 | Crimson Call |
 
