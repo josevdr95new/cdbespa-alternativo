@@ -31,16 +31,16 @@ Creado con [CDBtext_migrator](https://github.com/josevdr95new/CDBtext_migrator)
 <!-- STATS:START -->
 ## 📊 Estadísticas
 
-![Visitas](https://img.shields.io/badge/Visitas-24-blue) ![Visitantes únicos](https://img.shields.io/badge/Visitantes_únicos-8-brightgreen) ![Clonaciones](https://img.shields.io/badge/Clonaciones-12-green) ![Stars](https://img.shields.io/badge/⭐_Stars-5-ff69b4) ![Forks](https://img.shields.io/badge/Forks-0-orange) ![Watchers](https://img.shields.io/badge/Watchers-1-9cf)
+![Visitas](https://img.shields.io/badge/Visitas-81-blue) ![Visitantes únicos](https://img.shields.io/badge/Visitantes_únicos-14-brightgreen) ![Clonaciones](https://img.shields.io/badge/Clonaciones-211-green) ![Stars](https://img.shields.io/badge/⭐_Stars-5-ff69b4) ![Forks](https://img.shields.io/badge/Forks-0-orange) ![Watchers](https://img.shields.io/badge/Watchers-1-9cf)
 
 | Métrica | Total | Únicos |
 |---------|------:|-------:|
-| 👁️ Visitas | **24** | **8** |
-| 🌀 Clonaciones | **12** | **10** |
+| 👁️ Visitas | **81** | **14** |
+| 🌀 Clonaciones | **211** | **92** |
 | ⭐ Stars | **5** | — |
 | 🍴 Forks | **0** | — |
 | 👀 Watchers | **1** | — |
 
-<sub>Actualizado: 2026-07-18 · Registro desde: 2026-07-02</sub>
+<sub>Actualizado: 2026-07-19 · Registro desde: 2026-07-02</sub>
 
 <!-- STATS:END -->
