@@ -48,12 +48,12 @@ Creado con [CDBtext_migrator](https://github.com/josevdr95new/CDBtext_migrator)
 <!-- MIGRATE_LOG:START -->
 ## 🔄 Log de migración
 
-<sub>Última verificación: **2026-07-17 12:25 UTC**</sub>
+<sub>Última verificación: **2026-07-19 01:53 UTC**</sub>
 
 **Condición:** nombres en inglés · efectos en español · texto en `""` en inglés
 
 **Fuentes:**
-- `ProjectIgnis/BabelCDB` @ `9c962bb`
+- `ProjectIgnis/BabelCDB` @ `f9e0404`
 - `Team13fr/IgnisMulti` @ `d438822`
 
 ### Estado por archivo
@@ -73,12 +73,6 @@ Creado con [CDBtext_migrator](https://github.com/josevdr95new/CDBtext_migrator)
 | `prerelease-locr.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `prerelease-mzmu.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `release-blzd.cdb` | — | — | — | — | 📋 solo español, copiado |
-| `prerelease-betb.cdb` | — | — | — | — | 📋 solo inglés, copiado |
-| `prerelease-cori-en.cdb` | — | — | — | — | 📋 solo inglés, copiado |
-| `prerelease-dbgv.cdb` | — | — | — | — | 📋 solo inglés, copiado |
-| `prerelease-lpg2.cdb` | — | — | — | — | 📋 solo inglés, copiado |
-| `prerelease-rv01.cdb` | — | — | — | — | 📋 solo inglés, copiado |
-| `release-cori.cdb` | — | — | — | — | 📋 solo inglés, copiado |
 | **Total** | **24323** | **23824** | **10560** | **13264** | **499** |
 
 <sub>**EN** = total BabelCDB · **Traducidas** = también en IgnisMulti/ES · **✅ OK** = ya transformadas · **🆕 Nuevas** = transformadas esta ejecución · **❌ Sin trad. ES** = no existen en DB española</sub>
