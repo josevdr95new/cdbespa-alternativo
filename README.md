@@ -48,12 +48,12 @@ Creado con [CDBtext_migrator](https://github.com/josevdr95new/CDBtext_migrator)
 <!-- MIGRATE_LOG:START -->
 ## 🔄 Log de migración
 
-<sub>Última verificación: **2026-07-19 18:54 UTC**</sub>
+<sub>Última verificación: **2026-07-20 02:10 UTC**</sub>
 
 **Condición:** nombres en inglés · efectos en español · texto en `""` en inglés
 
 **Fuentes:**
-- `ProjectIgnis/BabelCDB` @ `ba612a7`
+- `ProjectIgnis/BabelCDB` @ `8d8176d`
 - `Team13fr/IgnisMulti` @ `d438822`
 
 ### Estado por archivo
@@ -63,7 +63,7 @@ Creado con [CDBtext_migrator](https://github.com/josevdr95new/CDBtext_migrator)
 | `cards-rush.cdb` | 3398 | 3194 | 3070 | **124** | **204** |
 | `cards-skills-unofficial.cdb` | 19 | 19 | 19 | 0 | 0 |
 | `cards-skills.cdb` | 208 | 208 | 208 | 0 | 0 |
-| `cards-unofficial.cdb` | 5878 | 5876 | 5749 | **127** | **2** |
+| `cards-unofficial.cdb` | 5878 | 5876 | 5748 | **128** | **2** |
 | `cards.cdb` | 14605 | 14336 | 1323 | **13013** | **269** |
 | `goat-entries.cdb` | 191 | 191 | 191 | 0 | 0 |
 | `prerelease-cards-rush.cdb` | 39 | 0 | 0 | 0 | **39** |
@@ -73,7 +73,7 @@ Creado con [CDBtext_migrator](https://github.com/josevdr95new/CDBtext_migrator)
 | `prerelease-locr.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `prerelease-mzmu.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `release-blzd.cdb` | — | — | — | — | 📋 solo español, copiado |
-| **Total** | **24350** | **23824** | **10560** | **13264** | **526** |
+| **Total** | **24350** | **23824** | **10559** | **13265** | **526** |
 
 <sub>**EN** = total BabelCDB · **Traducidas** = también en IgnisMulti/ES · **✅ OK** = ya transformadas · **🆕 Nuevas** = transformadas esta ejecución · **❌ Sin trad. ES** = no existen en DB española</sub>
 
@@ -135,7 +135,7 @@ Creado con [CDBtext_migrator](https://github.com/josevdr95new/CDBtext_migrator)
 | 160021006 | Rebuild Drake |
 | | *...y 74 más* |
 
-**`cards-unofficial.cdb`** (127 cartas)
+**`cards-unofficial.cdb`** (128 cartas)
 
 | ID | Nombre |
 |--:|--------|
@@ -189,7 +189,7 @@ Creado con [CDBtext_migrator](https://github.com/josevdr95new/CDBtext_migrator)
 | 511001200 | Full Armored Xyz (Anime) |
 | 511001229 | Eucalyptus Mole (Anime) |
 | 511001232 | Singularity Fiend (Anime) |
-| | *...y 77 más* |
+| | *...y 78 más* |
 
 **`cards.cdb`** (13013 cartas)
 
