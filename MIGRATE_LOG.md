@@ -1,12 +1,12 @@
 <!-- MIGRATE_LOG:START -->
 ## 🔄 Log de migración
 
-<sub>Última verificación: **2026-07-20 02:10 UTC**</sub>
+<sub>Última verificación: **2026-07-22 13:24 UTC**</sub>
 
 **Condición:** nombres en inglés · efectos en español · texto en `""` en inglés
 
 **Fuentes:**
-- `ProjectIgnis/BabelCDB` @ `8d8176d`
+- `ProjectIgnis/BabelCDB` @ `dbf0953`
 - `Team13fr/IgnisMulti` @ `d438822`
 
 ### Estado por archivo
@@ -17,16 +17,16 @@
 | `cards-skills-unofficial.cdb` | 19 | 19 | 19 | 0 | 0 |
 | `cards-skills.cdb` | 208 | 208 | 208 | 0 | 0 |
 | `cards-unofficial.cdb` | 5878 | 5876 | 5748 | **128** | **2** |
-| `cards.cdb` | 14605 | 14336 | 1323 | **13013** | **269** |
+| `cards.cdb` | 14609 | 14336 | 1309 | **13027** | **273** |
 | `goat-entries.cdb` | 191 | 191 | 191 | 0 | 0 |
 | `prerelease-cards-rush.cdb` | 39 | 0 | 0 | 0 | **39** |
-| `prerelease-others.cdb` | 12 | 0 | 0 | 0 | **12** |
+| `prerelease-others.cdb` | 8 | 0 | 0 | 0 | **8** |
 | `prerelease-cori.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `prerelease-loch.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `prerelease-locr.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `prerelease-mzmu.cdb` | — | — | — | — | 📋 solo español, copiado |
 | `release-blzd.cdb` | — | — | — | — | 📋 solo español, copiado |
-| **Total** | **24350** | **23824** | **10559** | **13265** | **526** |
+| **Total** | **24350** | **23824** | **10545** | **13279** | **526** |
 
 <sub>**EN** = total BabelCDB · **Traducidas** = también en IgnisMulti/ES · **✅ OK** = ya transformadas · **🆕 Nuevas** = transformadas esta ejecución · **❌ Sin trad. ES** = no existen en DB española</sub>
 
@@ -294,7 +294,7 @@
 | 810000001 | Invincible Demise Lord (Anime) |
 | 810000005 | Hero's Rule 1: Five Freedoms TBR) |
 
-**`cards.cdb`** (13013 cartas)
+**`cards.cdb`** (13027 cartas)
 
 | ID | Nombre |
 |--:|--------|
@@ -1470,6 +1470,7 @@
 | 8841431 | Centur-Ion Primera Primus |
 | 8842266 | Poison of the Old Man |
 | 8843569 | Wing Requital |
+| 8852158 | Reeshaddoll Wendikuruhu |
 | 8868767 | Dice It |
 | 8873112 | Artifact Chakram |
 | 8875971 | Star Seraph Scout |
@@ -4594,6 +4595,7 @@
 | 32452818 | Beaver Warrior |
 | 32453837 | Number 2: Ninja Shadow Mosquito |
 | 32465539 | Digital Bug Cocoondenser |
+| 32467459 | El Shaddoll Meshachrer |
 | 32472237 | Metalrokket Dragon |
 | 32476434 | Shogi Lance |
 | 32476603 | Silverrokket Dragon |
@@ -4819,6 +4821,7 @@
 | 34029630 | Pitch-Black Power Stone |
 | 34031284 | Ojama Emperor |
 | 34034150 | Mother Spider Splitter |
+| 34041788 | Empire of Endymion |
 | 34047456 | Gigantic Thundercross |
 | 34072799 | Transonic Bird |
 | 34079868 | Master Peace, the True Dracoslayer |
@@ -4971,6 +4974,7 @@
 | 35146019 | Altergeist Manifestation |
 | 35149085 | Beast Soul Swap |
 | 35151572 | Shaman of the Ashened City |
+| 35167376 | Surprise Token |
 | 35183584 | World Legacy Guardragon Mardark |
 | 35183853 | Bujin Regalia - The Mirror |
 | 35187185 | Oneiros, the Dream Mirror Erlking |
@@ -7408,6 +7412,7 @@
 | 53753697 | Zoa the Fiendish Beast |
 | 53754104 | Guard Mantis |
 | 53765052 | Diabellze the Original Sinkeeper |
+| 53770667 | Armament Reincarnation Token |
 | 53776969 | Scareclaw Light-Heart |
 | 53778229 | Silent Graveyard |
 | 53782828 | S-Force Retroactive |
@@ -8113,6 +8118,7 @@
 | 58988903 | Rank-Up-Magic Skip Force |
 | 58990362 | Zefraniu, Secret of the Yang Zing |
 | 58990631 | Automatic Laser |
+| 58995660 | First Striker Advantage |
 | 58996430 | Wulf, Lightsworn Beast |
 | 58996839 | Ashoka Pillar |
 | 59016454 | Dark Magic Mirror Force |
@@ -8300,6 +8306,7 @@
 | 60433216 | King Scarlet |
 | 60434101 | Fabled Gallabas |
 | 60434189 | Pendulum Impenetrable |
+| 60439482 | Arrow of Regulus |
 | 60442460 | Branded Befallen |
 | 60448701 | Ogdoadic Origin |
 | 60461077 | Gouki Riscorpio |
@@ -8414,6 +8421,7 @@
 | 61320914 | Vision HERO Minimum Ray |
 | 61322713 | Shadow's Light |
 | 61344030 | Starliege Paladynamo |
+| 61345801 | Void Unleashing |
 | 61370518 | Skull Archfiend of Lightning |
 | 61374414 | CXyz N.As.Ch. Knight |
 | 61380658 | Watthopper |
@@ -9479,6 +9487,7 @@
 | 69633792 | Evolsaur Terias |
 | 69655484 | Performage Shadow Maker |
 | 69669405 | Horn Imp |
+| 69678646 | Stellarnova Binding |
 | 69680031 | Dogmatika Fleurdelis, the Knighted |
 | 69695704 | Battlestorm |
 | 69700783 | Vampire's Desire |
@@ -9739,6 +9748,7 @@
 | 71759912 | Tree Otter |
 | 71768839 | I.A.S. -Invasive Alien Species- |
 | 71771004 | Readying of Rites |
+| 71771005 | Sacrificial Offering Token |
 | 71782404 | Red-Eyes Burn |
 | 71786742 | Geargiano |
 | 71791814 | Magical Musketeer Max |
@@ -9812,6 +9822,7 @@
 | 72355272 | Metaphys Nephthys |
 | 72355441 | Xyz Gift |
 | 72370114 | Geargiattacker |
+| 72374522 | Thorns of Violet Poison |
 | 72378329 | Beast-Eyes Pendulum Dragon |
 | 72386290 | Focused Aquamirror |
 | 72402069 | D/D/D Super Doom King Bright Armageddon |
@@ -12599,6 +12610,8 @@
 | 94377247 | Curse of the Masked Beast |
 | 94380860 | Number 103: Ragnazero |
 | 94381039 | Celestia, Lightsworn Angel |
+| 94384775 | Shinsen Token |
+| 94384776 | Ebisu Token |
 | 94388754 | Flower Cardian Clover with Boar |
 | 94392192 | Kashtira Ogre |
 | 94395649 | Cocatorium the Heavy Metal Avian |
@@ -12752,6 +12765,7 @@
 | 95500396 | Superheavy Samurai Soulpeacemaker |
 | 95503687 | Lumina, Lightsworn Summoner |
 | 95504778 | Triggering Wurm |
+| 95506252 | Shadowreaver Knight 21 |
 | 95507060 | Raging Mad Plants |
 | 95511642 | Crowned by the World Chalice |
 | 95515058 | Gouki The Blade Ogre |
@@ -13532,7 +13546,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 17412731 | Elder Entity Norden |
 | 96782896 | Mind Master |
 
-**`cards.cdb`** (269 cartas)
+**`cards.cdb`** (273 cartas)
 
 | ID | Nombre (EN) |
 |--:|-------------|
@@ -13597,6 +13611,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 19326613 | Once Upon a Fairy Tail |
 | 19434243 | Power Vice Dragon |
 | 19438484 | Ilios the Black Sun Dragon |
+| 19491080 | Clown Crew Cappello |
 | 19504025 | Enneacraft Reset |
 | 20448151 | Clown Crew Rehearsal |
 | 21419436 | Unchained Soul Rage Abominator |
@@ -13650,6 +13665,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 41350418 | Dark Magical Curtain |
 | 41424250 | Chaos End Ruler - Ruler of the Beginning and the E |
 | 41763141 | Fata Dragna |
+| 42026772 | The Magical King of Dimension Zeta |
 | 42138622 | Vortex of Time |
 | 42232157 | Stage of Destiny |
 | 42719764 | Summon Shock |
@@ -13700,6 +13716,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 56725612 | Fairy Tail Ball |
 | 56838842 | Fiend Piece Golem |
 | 57847269 | Clown Crew Matinee Operatics |
+| 59106048 | Witchcrafter Seed |
 | 59242459 | Exosisters Magnifica |
 | 60516416 | Possessed Resonance - Wynn |
 | 63166097 | Sky Striker Mobilize - Engage! |
@@ -13734,6 +13751,7 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 72270341 | Diabellstar the Black Witch |
 | 72921536 | Comic Cat |
 | 72989440 | Black Luster Soldier - Envoy of the Beginning |
+| 73320394 | Evil Lord - Zorc |
 | 73443672 | Underworld Circle |
 | 74378580 | GMX Lab #5 |
 | 74665150 | Decode Talker Integration |
@@ -13850,17 +13868,13 @@ Estas cartas existen en BabelCDB pero no en IgnisMulti/Español. Se transformar�
 | 160459024 | Panther Warrior (Rush) |
 | 160459025 | Goblin Attack Force (Rush) |
 
-**`prerelease-others.cdb`** (12 cartas)
+**`prerelease-others.cdb`** (8 cartas)
 
 | ID | Nombre (EN) |
 |--:|-------------|
 | 100200292 | Thoroughbred Elf |
 | 100200293 | Assault Lion |
 | 100200294 | Power Connection |
-| 100200295 | Evil Lord - Zorc |
-| 100295121 | Clown Crew Hat |
-| 100296302 | Witchcrafter Seed |
-| 100350262 | The Magical King of Dimension Zeta |
 | 100457001 | Ancient Secrets |
 | 100457102 | Mind Mirror Force |
 | 100457103 | Emissaries from Darkness |
