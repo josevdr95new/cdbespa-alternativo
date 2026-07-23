@@ -75,6 +75,10 @@
     "2026-07-20": {
       "count": 5,
       "uniques": 2
+    },
+    "2026-07-21": {
+      "count": 0,
+      "uniques": 0
     }
   },
   "daily_clones": {
@@ -153,12 +157,16 @@
     "2026-07-20": {
       "count": 17,
       "uniques": 8
+    },
+    "2026-07-21": {
+      "count": 8,
+      "uniques": 4
     }
   },
   "lifetime_total_views": 89,
   "lifetime_total_unique_views": 18,
-  "lifetime_total_clones": 270,
-  "lifetime_total_unique_clones": 123,
-  "last_updated": "2026-07-22",
+  "lifetime_total_clones": 278,
+  "lifetime_total_unique_clones": 127,
+  "last_updated": "2026-07-23",
   "tracking_since": "2026-07-02"
 }
