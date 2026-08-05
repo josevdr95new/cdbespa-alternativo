@@ -119,6 +119,18 @@
     "2026-07-31": {
       "count": 0,
       "uniques": 0
+    },
+    "2026-08-01": {
+      "count": 5,
+      "uniques": 1
+    },
+    "2026-08-02": {
+      "count": 22,
+      "uniques": 2
+    },
+    "2026-08-03": {
+      "count": 0,
+      "uniques": 0
     }
   },
   "daily_clones": {
@@ -241,12 +253,24 @@
     "2026-07-31": {
       "count": 17,
       "uniques": 8
+    },
+    "2026-08-01": {
+      "count": 5,
+      "uniques": 3
+    },
+    "2026-08-02": {
+      "count": 8,
+      "uniques": 4
+    },
+    "2026-08-03": {
+      "count": 4,
+      "uniques": 4
     }
   },
-  "lifetime_total_views": 113,
-  "lifetime_total_unique_views": 27,
-  "lifetime_total_clones": 390,
-  "lifetime_total_unique_clones": 177,
-  "last_updated": "2026-08-04",
+  "lifetime_total_views": 140,
+  "lifetime_total_unique_views": 30,
+  "lifetime_total_clones": 407,
+  "lifetime_total_unique_clones": 188,
+  "last_updated": "2026-08-05",
   "tracking_since": "2026-07-02"
 }
